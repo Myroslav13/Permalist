@@ -1,5 +1,22 @@
 <%- include("partials/header.ejs")%>
+<main>
+  <h1>Today</h1>
+  
+  <div class="container">
+    <div>
+      <% notes.forEach(el => { %>
+        <form method="post" action="/edit" class="form-edit">
+          <input type="checkbox">
+          <p><%= el %></p>
+          <img src="assets/icons/pencil-solid.svg">
+        </form>
+      <% }); %>
+    </div>
 
-
-<div class="diagonal-bg"></div>
-<%- include("partials/footer.ejs")%>
+    <form method="post" action="/add" class="form-add">
+      <input type="text" placeholder="New item" name="new_item">
+      <input type="submit" value="+">
+    </form>
+  </div>
+</main>
+<!--<%- include("partials/footer.ejs")%>-->

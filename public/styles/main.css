@@ -6,13 +6,22 @@ html {
 
 body {
     display: flex;
-    justify-content: center;
-    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
     margin: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
 }
 
 h1, .container {
     border-radius: 3px;
+    width: 300px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
@@ -26,7 +35,6 @@ h1 {
 
 .container {
     background-color: white;
-    width: 300px;
 }
 
 input {
@@ -64,12 +72,40 @@ input[type="text"], input::placeholder {
     padding: 0px 15px;
 }
 
-.form-add {
+form {
     display: flex;
     justify-content: space-between;
+}
+
+.form-add {
     padding: 7px 15px 7px 15px;
+}
+
+.form-edit {
+    padding: 0px 15px;
+}
+
+.form-complete-edit {
+    padding: 0px;
 }
 
 img {
     width: 12px;
+}
+
+.btn-edit {
+    border: none;
+    background-color: white;
+}
+
+.input-edit {
+    display: none;
+    margin: 16px 0px;
+}
+
+.btn-done {
+    display: none;
+    background-color: white;
+    border: none;
+    padding: 0px 15px;
 }

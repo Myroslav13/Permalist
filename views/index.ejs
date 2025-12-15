@@ -4,19 +4,57 @@
   
   <div class="container">
     <div>
-      <% notes.forEach(el => { %>
-        <form method="post" action="/edit" class="form-edit">
-          <input type="checkbox">
-          <p><%= el %></p>
-          <img src="assets/icons/pencil-solid.svg">
-        </form>
+      <% notes.forEach((el) => { %>
+        <div class="form-edit">
+          <form method="post" action="/delete/<%= el.id %>" class="form-delete">
+            <input type="checkbox" class="checkbox-delete">
+          </form>
+
+          <p class="p-text"><%= el.task %></p>
+          
+          <button class="btn-edit">
+            <img src="assets/icons/pencil-solid.svg" alt="Edit">
+          </button>
+
+          <form method="post" action="/edit/<%= el.id %>" class="form-complete-edit">
+            <input type="text" name="edited_item" class="input-edit">
+            
+            <button type="submit" class="btn-done">
+              <img src="assets/icons/check-solid.svg" alt="Check">
+            </button>
+          </form>
+        </div>
       <% }); %>
     </div>
 
     <form method="post" action="/add" class="form-add">
-      <input type="text" placeholder="New item" name="new_item">
+      <input type="text" placeholder="<%= locals.error ? locals.error : 'New item' %>" name="new_item">
       <input type="submit" value="+">
     </form>
   </div>
 </main>
-<!--<%- include("partials/footer.ejs")%>-->
+
+<script>
+  document.querySelectorAll(".checkbox-delete").forEach((checkbox) => {
+    checkbox.addEventListener("change", () => {
+      checkbox.closest(".form-delete").submit();
+    });
+  });
+
+  document.querySelectorAll(".btn-edit").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const container = btn.closest(".form-edit");
+      const inputEdit = container.querySelector(".input-edit");
+      const pText = container.querySelector(".p-text");
+      const btnDone = container.querySelector(".btn-done");
+
+      inputEdit.style.display = "block";
+      btnDone.style.display = "block";
+      inputEdit.value = pText.innerText;
+      pText.style.display = "none";
+      btn.style.display = "none";
+    });
+  });
+</script>
+
+<%- include("partials/footer.ejs")%>
